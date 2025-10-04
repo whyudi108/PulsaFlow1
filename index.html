@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PulsaFlow — Simpel</title>
+
+  <style>
+    :root {
+      --bg: #f6fbfb;
+      --card: #ffffff;
+      --accent: #0ea5a4;
+      --text: #05343a;
+      --muted: #2f6b6a;
+      --radius: 12px;
+      --max-width: 720px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 32px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: 20px;
+    }
+
+    p.lead {
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta {
+      margin: 20px 0;
+      /* dibuat lebih memawah dengan jarak lebih besar */
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .grid {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* rate section */
+    .rates {
+      margin-top: 18px;
+      /* dorong ke bawah */
+      background: #f8fdfd;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(6, 95, 94, 0.06);
+    }
+
+    .rates table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .rates th,
+    .rates td {
+      text-align: left;
+      padding: 8px 6px;
+      border-bottom: 1px solid rgba(6, 95, 94, 0.06);
+    }
+
+    .rates th {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* small screens: keep it simple */
+    @media(min-width:800px) {
+      .layout {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .main {
+        flex: 1;
+      }
+
+      .aside {
+        width: 260px;
+      }
+    }
+
+    /* toast */
+    #toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      background: #083344;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity .18s, transform .18s;
+      pointer-events: none;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <div class="logo" aria-label="PulsaFlow">💸 PulsaFlow</div>
+        <div class="contact">
+          Admin WA: <strong>0822-4921-0731</strong><br>
+          whyudi.108@gmail.com
+        </div>
+      </header>
+
+      <div class="layout">
+        <main class="main">
+          <h1>Tukar Pulsa Jadi Uang Instan</h1>
+          <p class="lead">Langsung cair ke rekening atau e-wallet. Layanan cepat untuk Telkomsel, XL, Indosat, Axis,
+            Tri, Smartfren.</p>
+
+          <div class="cta">
+            <button id="chatBtn" class="btn" aria-label="Chat Admin">
+              💬 Chat Admin Sekarang
+            </button>
+          </div>
+
+          <div class="grid" aria-hidden="false">
+            <div>
+              <strong>Provider yang dilayani</strong>
+              <ul class="list">
+                <li>Telkomsel</li>
+                <li>XL</li>
+                <li>Indosat</li>
+                <li>Axis</li>
+                <li>Tri</li>
+                <li>Smartfren</li>
+              </ul>
+
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">
+                Minimal pulsa yang diproses: <strong>Rp 30.000</strong>.
+              </p>
+            </div>
+
+            <!-- Bagian Rate ditempatkan lebih ke bawah -->
+            <div class="rates" aria-label="Rate dan Estimasi">
+              <strong>Rate & Estimasi Pencairan</strong>
+              <table role="table" aria-label="Daftar rate">
+                <thead>
+                  <tr>
+                    <th>Nominal Pulsa</th>
+                    <th>Telkomsel (rate 0.87)</th>
+                    <th>Provider Lain (rate 0.85 - 0.75)</th>
+                    <th>Estimasi Waktu</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Rp 30.000</td>
+                    <td>Rp 26.100</td>
+                    <td>Rp 25.500 - Rp 22.500</td>
+                    <td>Instan</td>
+                  </tr>
+                  <tr>
+                    <td>Rp 50.000</td>
+                    <td>Rp 43.500</td>
+                    <td>Rp 42.500 - Rp 37.500</td>
+                    <td>Instan</td>
+                  </tr>
+                  <tr>
+                    <td>Rp 100.000</td>
+                    <td>Rp 87.000</td>
+                    <td>Rp 85.000 - Rp 75.000</td>
+                    <td>Instan</td>
+                  </tr>
+                  <tr>
+                    <td>Rp 150.000</td>
+                    <td>Rp 130.500</td>
+                    <td>Rp 127.500 - Rp 112.500</td>
+                    <td>Instan</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">
+                Telkomsel menggunakan rate 0.87. Provider lain berkisar antara 0.85 - 0.75, dan nilai akhir akan
+                dikonfirmasi melalui chat admin.
+              </p>
+            </div>
+          </div>
+        </main>
+
+        <aside class="aside" aria-label="Ringkasan">
+          <div style="margin-bottom:12px;">
+            <strong>Hubungi Admin</strong>
+            <p style="margin:6px 0 0;color:var(--muted);font-size:14px">Chat WA: <strong>0822-4921-0731</strong></p>
+          </div>
+
+          <div>
+            <strong>Kenapa pilih kami?</strong>
+            <p style="margin:6px 0 0;color:var(--muted);font-size:14px">Proses cepat, aman, dan rate kompetitif. Chat
+              untuk konfirmasi.</p>
+          </div>
+        </aside>
+      </div>
+
+      <footer>PulsaFlow © 2025 — Simpel & Aman</footer>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite">Menghubungkan ke Admin...</div>
+
+  <script>
+    (function () {
+      const chatBtn = document.getElementById('chatBtn');
+      const toast = document.getElementById('toast');
+      const wa = 'https://wa.me/6282249210731?text=Halo%20PulsaFlow%2C%20saya%20ingin%20tukar%20pulsa.';
+
+      function show(msg = 'Menghubungkan...') {
+        toast.textContent = msg;
+        toast.classList.add('show');
+      }
+      function hide() { toast.classList.remove('show'); }
+
+      chatBtn.addEventListener('click', function () {
+        show('Membuka WhatsApp...');
+        setTimeout(function () { window.location.href = wa; }, 600);
+        setTimeout(hide, 3000);
+      });
+
+      // keyboard accessibility
+      chatBtn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chatBtn.click(); }
+      });
+    })();
+  </script>
+</body>
+
+</html>
